@@ -19,7 +19,7 @@ const postSchema = new mongoose.Schema({
 const Post = mongoose.model("Post", postSchema);
 const theBlogDB = async () => {
   try {
-    await mongoose.connect("mongodb://0.0.0.0:27017/blogDB");
+    await mongoose.connect("mongodb+srv://admin-nader:Godzilla1975@cluster0.kfefuuh.mongodb.net/blogDB");
     console.log("Connected to database.");
   } catch (error) {
     console.error("Error connecting to the database:", error);
@@ -30,10 +30,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 app.get("/", async (req, res) => {
-  // const posts = await Post.find({});
+  const posts = await Post.find({});
   res.render("home.ejs", {
     startingContant: homeStartingContent,
-    posts: await Post.find({})
+    posts: posts
   });
 });
 
